@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prateleira — Minha Coleção de Esmaltes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topo">
+      <h1>Prateleira</h1>
+      <span id="total" class="suave">0 esmaltes</span>
+    </header>
+
+    <!-- Aviso de validade (aparece só quando há esmaltes vencendo ou vencidos) -->
+    <div id="aviso" class="aviso" hidden></div>
+
+    <label class="busca">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="busca" type="search" placeholder="Buscar por nome" aria-label="Buscar esmalte">
+    </label>
+
+    <!-- Resumo: cada cartão também funciona como filtro -->
+    <div class="resumo">
+      <button class="cartao" data-filtro="ok">
+        <strong id="qtdOk">0</strong><span>em dia</span>
+      </button>
+      <button class="cartao perto" data-filtro="perto">
+        <strong id="qtdPerto">0</strong><span>vencem em 30 dias</span>
+      </button>
+      <button class="cartao vencido" data-filtro="vencido">
+        <strong id="qtdVencido">0</strong><span>vencidos</span>
+      </button>
+    </div>
+    <p id="filtroAtivo" class="filtro-ativo" hidden></p>
+
+    <section id="prateleira" class="prateleira" aria-label="Esmaltes"></section>
+
+    <div id="vazio" class="vazio" hidden>
+      <p>Sua prateleira está vazia.</p>
+      <button id="btnExemplos" class="botao-secundario">Carregar exemplos</button>
+    </div>
+
+    <button id="btnNovo" class="botao-principal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+      Cadastrar esmalte
+    </button>
+  </main>
+
+  <!-- Janela de cadastro / edição -->
+  <dialog id="janela">
+    <form id="formulario" method="dialog">
+      <h2 id="tituloJanela">Novo esmalte</h2>
+
+      <label>Nome
+        <input id="campoNome" required maxlength="40" placeholder="Ex.: Coral Verão">
+      </label>
+
+      <label>Cor
+        <input id="campoCor" type="color" value="#f2735a">
+      </label>
+
+      <label>Data de fabricação
+        <input id="campoFabricacao" type="date" required>
+      </label>
+
+      <label>Data de validade <span class="suave">(se estiver no vidro)</span>
+        <input id="campoValidade" type="date">
+      </label>
+
+      <label>Ou: validade em meses <span class="suave">(símbolo do pote, ex.: 24M)</span>
+        <input id="campoMeses" type="number" min="1" max="60" value="24">
+      </label>
+
+      <p class="dica suave">Se a data de validade ficar em branco, ela é calculada pela data de fabricação + meses.</p>
+
+      <div class="acoes">
+        <button type="button" id="btnExcluir" class="botao-perigo" hidden>Descartar</button>
+        <button type="button" id="btnCancelar" class="botao-secundario">Cancelar</button>
+        <button type="submit" class="botao-principal">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
